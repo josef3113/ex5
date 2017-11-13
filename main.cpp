@@ -38,4 +38,6 @@ void main ()
 	cin>>num3;
 	cout<<num3;
     system ("pause");
+
+	
 }
