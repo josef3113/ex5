@@ -49,88 +49,147 @@ void Rational::printnum()
 	//cout<<"_"<<endl;
 	//cout<<denominator<<endl;
 }
-Rational Rational::getRational()
+Rational Rational::getRational()const
 {
 	Rational temp;
 	temp=(*this);
 	return temp;
 }
-int Rational::getdenominator()
+int Rational::getdenominator()const
 {
 	return denominator;
 }
-int Rational::getnumerator()
+int Rational::getnumerator()const
 {
 	return numerator;
 }
- Rational operator + (Rational A,Rational B)
+/////////////////////////////////////////////////////////////////////////////////
+Rational Rational:: operator + (const int & B)const
 {
 	Rational temp;
-	temp.setdenominator(A.getdenominator()*B.getdenominator());
-	temp.setnumerator( (A.getnumerator()*B.getdenominator()) + B.getnumerator()*A.getdenominator() );
-	reduction(temp);
+	temp=ItoR(B);
+	temp=this->getRational()+temp;
+	temp.reduction();
 	return temp;
 }
-
- Rational operator -(Rational lack, Rational sub)
+ Rational Rational::operator+  (const Rational &B)const
+{
+	Rational temp;
+	temp.setdenominator(this->denominator*B.getdenominator());
+	temp.setnumerator( (this->numerator*B.getdenominator()) + B.getnumerator()*this->denominator );
+	temp.reduction();
+	return temp;
+}
+ //////////////////////////////////////////////////////////////////////////
+ Rational Rational:: operator -(const int &sub)const
  {
    Rational temp;
-	temp.setdenominator(lack.getdenominator()*sub.getdenominator());
-	temp.setnumerator( (lack.getnumerator()*sub.getdenominator()) - sub.getnumerator()*lack.getdenominator() );
-	reduction(temp);
+	temp=ItoR(sub);
+	temp=this->getRational()-temp;
+	temp.reduction();
 	return temp;
  }
 
- Rational operator * (Rational A,Rational B)
+ Rational Rational:: operator -(const Rational &sub)const
+ {
+   Rational temp;
+	temp.setdenominator(this->denominator*sub.getdenominator());
+	temp.setnumerator( (this->numerator*sub.getdenominator()) - sub.getnumerator()*this->denominator );
+	temp.reduction();
+	return temp;
+ }
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  Rational Rational:: operator * (const int &B)const
  {
 	 Rational temp;
-	temp.setdenominator(A.getdenominator()*B.getdenominator());
-	temp.setnumerator(A.getnumerator()*B.getnumerator());
-	reduction(temp);
+	temp=ItoR(B);
+	temp=this->getRational()*temp;
+	temp.reduction();
 	return temp;
 
  }
 
- Rational operator / (Rational A ,Rational B)
+
+ Rational Rational:: operator * (const Rational &B)const
+ {
+	 Rational temp;
+	temp.setdenominator(this->denominator*B.getdenominator());
+	temp.setnumerator(this->numerator*B.getnumerator());
+	temp.reduction();
+	return temp;
+
+ }
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  Rational Rational:: operator / (const int &B)const
  {
 	  Rational temp;
-	temp.setdenominator(A.getdenominator()*B.getnumerator());
-	temp.setnumerator(A.getnumerator()*B.getdenominator());
-	reduction(temp);
+	  temp=ItoR(B);
+	  temp=this->getRational()/temp;
+	  temp.reduction();
+	  return temp;
+
+ }
+
+
+ Rational Rational:: operator / (const Rational &B)const
+ {
+	  Rational temp;
+	temp.setdenominator(this->denominator*B.getnumerator());
+	temp.setnumerator(this->numerator*B.getdenominator());
+	temp.reduction();
 	return temp;
 
  }
 
- Rational operator !(Rational A)
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ Rational Rational:: operator !()const
  {
 	 Rational temp;
-	 temp.setdenominator(A.getnumerator());
-	 temp.setnumerator(A.getdenominator());
+	 temp.setdenominator(this->numerator);
+	 temp.setnumerator(this->denominator);
 
 	 return temp;
  }
 
  int gcd(int a,int b)
  {
-	 int temp,GCD;
+	 int temp,GCD=1;
 	 if(a<b)
 	 {
 		 temp =a;
 		 a=b;
 		 b=temp;
 	 }
-	for(int i=1;i<=b;i++)
+	for(int i=b;i>0;i--)
 	{
 		if(a%i==0 && b%i==0)
+		{
 			GCD=i;
+		    return GCD;
+		}
 	}
-	 return GCD;
  }
- void reduction (Rational &A)
+ void Rational::reduction ()
  {
 	int x;
-	x=gcd (A.getdenominator(),A.getnumerator());
-	A.setdenominator(A.getdenominator()/x);
-	A.setnumerator(A.getnumerator()/x);
+	x=gcd (this->denominator,this->numerator);
+	this->denominator=this->denominator/x;
+	this->numerator=this->numerator/x;
 	return;
+ }
+
+ Rational ItoR(int I)
+ {
+   Rational temp;
+   temp.setdenominator(1).setnumerator(I);
+   return temp;
  }
