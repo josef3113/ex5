@@ -119,12 +119,15 @@ int Rational::getnumerator()
 		 a=b;
 		 b=temp;
 	 }
-	for(int i=1;i<=b;i++)
+	for(int i= b ;i>0;i--)
 	{
-		if(a%i==0 && b%i==0)
-			GCD=i;
+		if (a%i == 0 && b%i == 0)
+		{
+			GCD = i;
+			return GCD;
+		}
 	}
-	 return GCD;
+	 
  }
  void reduction (Rational &A)
  {
