@@ -15,7 +15,7 @@ Rational::Rational(int numerator,int denominator)
 	this->setdenominator(denominator).setnumerator(numerator);
 }
 
- ostream&  operator << (std::ostream &output,Rational A)
+ ostream&  operator << (ostream &output,const Rational &A)
 {
 	output<<A.numerator<<"/"<<A.denominator<<endl;
 	return output;

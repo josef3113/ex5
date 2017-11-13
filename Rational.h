@@ -27,8 +27,8 @@ public:
 	  Rational operator / (const int &B)const;
 	  Rational operator ! ()const;
 	  void reduction ();
-	friend ostream& operator << (std::ostream&,Rational);
-	friend istream& operator >>(std::istream&,Rational&);
+	friend ostream& operator << (ostream&,const Rational&);
+	friend istream& operator >>(istream&,Rational&);
 	
 };
  
