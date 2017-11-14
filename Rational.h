@@ -11,6 +11,7 @@ private:
 public:
 	Rational();
 	Rational(int, int);
+	Rational(const Rational& inRat);    // Copy Constractor Added
 	Rational getRational()const;
 	int getdenominator()const;
 	int getnumerator()const;
