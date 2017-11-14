@@ -15,6 +15,13 @@ Rational::Rational(int numerator,int denominator)
 	this->setdenominator(denominator).setnumerator(numerator);
 }
 
+Rational::Rational(const Rational& inRat)    // Copy Constractor Added
+{
+	this->setnumerator(inRat.getnumerator());
+	this->setdenominator(inRat.getdenominator());
+
+}
+
  ostream&  operator << (ostream &output,const Rational &A)
 {
 	output<<A.numerator<<"/"<<A.denominator<<endl;
